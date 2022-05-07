@@ -1,0 +1,30 @@
+﻿@model Setting
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Logo</th>
+            <th scope="col">Store Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td><img src="~/assets/images/@Model.Logo" alt="Alternate Text" style="width:100%" /></td>
+            <td>@Model.StoreName</td>
+            <td>@Model.Phone</td>
+            <td>@Model.Email</td>
+            <td>@Model.Address</td>
+            <td>
+                <a class="btn btn-primary" asp-action="Detail">Detail</a>
+                <a class="btn btn-warning" asp-action="Update">Update</a>
+
+            </td>
+
+        </tr>
+        
+    </tbody>
+</table>
