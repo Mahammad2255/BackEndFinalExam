@@ -1,17 +1,17 @@
-﻿@model  IEnumerable<BasketVM>
-@{ 
+﻿@model IEnumerable<BasketVM>
+@{
     double subTotal = 0;
     double tax = 0;
     double vat = 0;
 }
-
+ 
 <div class="minicart-close">
 
     <i class="ion-android-close"></i>
 </div>
 <div class="minicart-content-box">
     <div class="minicart-item-wrapper">
-     
+
         <ul>
             @foreach (BasketVM basketVM in Model)
             {
