@@ -18,6 +18,10 @@ namespace BackEndFinalExam.Models
         public double DiscountPrice { get; set; }
         public bool Aviability{ get; set; }
         public bool IsBestSeller{ get; set; }
+        [Column(TypeName = "money")]
+        public double EcoTax { get; set; }
+        [Column(TypeName = "money")]
+        public double VAT { get; set; }
         //[StringLength(1000), Required]
         //public string MainImage{ get; set; }
         public int CategoryId { get; set; }

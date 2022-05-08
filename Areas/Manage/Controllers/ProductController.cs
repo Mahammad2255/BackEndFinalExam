@@ -64,6 +64,7 @@ namespace BackEndFinalExam.Areas.Manage.Controllers
           
             ViewBag.Colors = await _context.Colors.ToListAsync();
             ViewBag.Sizes = await _context.Sizes.ToListAsync();
+  
             return View();
         }
 

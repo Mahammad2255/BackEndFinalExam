@@ -1,7 +1,9 @@
 ﻿using BackEndFinalExam.DAL;
 using BackEndFinalExam.Models;
+using BackEndFinalExam.ViewModel.Basket;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,68 +36,63 @@ namespace BackEndFinalExam.Controllers
             return PartialView("_ProductDetailPartial", product);
         }
 
-        //public async Task<IActionResult> AddBasket(int? id, int count = 1)
-        //{
-        //    if (id == null) return BadRequest();
+        public async Task<IActionResult> AddBasket(int? id, int count = 1)
+        {
 
-        //    Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            if (id == null) return BadRequest();
 
-        //    if (product == null) return NotFound();
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
-        //    string cookieBasket = HttpContext.Request.Cookies["basket"];
+            if (product == null) return NotFound();
 
-        //    List<BasketVM> basketVMs = null;
+            string cookieBasket = HttpContext.Request.Cookies["basket"];
 
-        //    if (cookieBasket != null)
-        //    {
-        //        basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(cookieBasket);
+            List<BasketVM> basketVMs = null;
 
-        //        if (basketVMs.Any(b => b.ProductId == id))
-        //        {
-        //            basketVMs.Find(b => b.ProductId == id).Count += count;
-        //        }
-        //        else
-        //        {
-        //            #region old
-        //            //BasketVM basketVM = new BasketVM
-        //            //{
-        //            //    ProductId = (int)id,
-        //            //    Count = count
-        //            //};
+            if (cookieBasket != null)
+            {
+                basketVMs = JsonConvert.DeserializeObject<List<BasketVM>>(cookieBasket);
 
-        //            //basketVMs.Add(basketVM);
-        //            #endregion
+                if (basketVMs.Any(b => b.ProductId == id))
+                {
+                    basketVMs.Find(b => b.ProductId == id).Count += count;
+                }
+                else
+                {
 
-        //            basketVMs.Add(new BasketVM
-        //            {
-        //                ProductId = (int)id,
-        //                Count = count
-        //            });
-        //        }
-        //    }
-        //    else
-        //    {
-        //        basketVMs = new List<BasketVM>();
-        //        basketVMs.Add(new BasketVM
-        //        {
-        //            ProductId = (int)id,
-        //            Count = count
-        //        });
-        //    }
 
-        //    cookieBasket = JsonConvert.SerializeObject(basketVMs);
-        //    HttpContext.Response.Cookies.Append("basket", cookieBasket);
+                    basketVMs.Add(new BasketVM
+                    {
+                        ProductId = (int)id,
+                        Count = count
+                    });
+                }
+            }
+            else
+            {
+                basketVMs = new List<BasketVM>();
+                basketVMs.Add(new BasketVM
+                {
+                    ProductId = (int)id,
+                    Count = count
+                });
+            }
 
-        //    foreach (BasketVM basketVM in basketVMs)
-        //    {
-        //        Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.ProductId);
-        //        basketVM.Image = dbProduct.MainImage;
-        //        basketVM.Price = dbProduct.DiscountPrice > 0 ? dbProduct.DiscountPrice : dbProduct.Price;
-        //        basketVM.ExTax = dbProduct.ExTax;
-        //        basketVM.Title = dbProduct.Title;
-        //    }
+            cookieBasket = JsonConvert.SerializeObject(basketVMs);
+            HttpContext.Response.Cookies.Append("basket", cookieBasket);
 
-        //    return PartialView("_BasketPartial", basketVMs);
-        //}
+            foreach (BasketVM basketVM in basketVMs)
+            {
+                Product dbProduct = await _context.Products.FirstOrDefaultAsync(p => p.Id == basketVM.ProductId);
+                basketVM.Image = dbProduct.MainImage;
+                basketVM.Price = dbProduct.DiscountPrice > 0 ? dbProduct.DiscountPrice : dbProduct.Price;
+                basketVM.EcoTax = dbProduct.EcoTax;
+                basketVM.VAT = dbProduct.VAT;
+                basketVM.Name = dbProduct.Name;
+            }
+
+            return PartialView("_BasketPartial", basketVMs);
+
+        }
     }
 }

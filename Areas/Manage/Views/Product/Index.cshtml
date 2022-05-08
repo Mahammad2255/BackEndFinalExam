@@ -24,6 +24,10 @@
             <th scope="col">Description</th>
             <th scope="col">Color</th>
             <th scope="col">Sizes</th>
+            <th scope="col">Count</th>
+            <th scope="col">Eco Tax</th>
+            <th scope="col">VAT</th>
+
 
 
 
@@ -55,6 +59,8 @@
             <th scope="row">@string.Join(',', product.ProductSizeColors.Select(p => p.Color.Name))</th>
             <th scope="row">@string.Join(',', product.ProductSizeColors.Select(p => p.Size.Name))</th>
             <td>@product.Count</td>
+            <td>@product.EcoTax</td>
+            <td>@product.VAT</td>
 
 
 
