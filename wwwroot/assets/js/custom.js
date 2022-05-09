@@ -154,4 +154,32 @@
 
 		}
 	})
+	$(document).on("click", ".deletecard", function (e) {
+		e.preventDefault();
+
+		let url = $(this).attr("href");
+
+		fetch(url).then(response => {
+			fetch("Basket/GetBasket").then(response => response.text()).then(data => $(".minicart-inner-content").html(data))
+
+			return response.text()
+		}).then(data => $(".basketContainer").html(data))
+	})
+	$(document).on("click", ".deletebasket", function (e) {
+		e.preventDefault();
+
+		let url = $(this).attr("href");
+
+		fetch(url).then(response => {
+			fetch("Basket/GetCard").then(response => response.text()).then(data => $(".basketContainer").html(data))
+
+			return response.text()
+		}).then(data => $(".minicart-inner-content").html(data))
+	})
 })
+
+
+
+
+
+

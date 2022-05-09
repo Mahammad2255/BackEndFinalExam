@@ -31,7 +31,7 @@
                             <span class="cart-price">$@basketVM.Price.ToString("0.00")</span>
                         </p>
                     </div>
-                    <button class="minicart-remove"><i class="ion-android-close"></i></button>
+                    <a asp-controller="Basket" asp-action="DeleteBasket" asp-route-id="@basketVM.ProductId" class="minicart-remove deletebasket" style="cursor:pointer;"><i class="ion-android-close"></i></a>
                 </li>
 
                 subTotal += (basketVM.Price * basketVM.Count);

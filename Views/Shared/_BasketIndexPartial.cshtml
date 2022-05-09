@@ -34,7 +34,7 @@
                                 <a asp-action="update" asp-controller="basket" asp-route-id="@basketVM.ProductId" class="basketUpdate addCount "><i class="fal fa-plus">+</i></a>
                             </td>
                             <td class="pro-subtotal"><span>@((basketVM.Count * basketVM.Price).ToString("0.00"))</span></td>
-                            <td class="pro-remove"><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                            <td class="pro-remove"><a class="deletecard" asp-controller="Basket" asp-action="DeleteCard" asp-route-id="@basketVM.ProductId"><i class="fa fa-trash-o"></i></a></td>
                         </tr>
 
                         subTotal += (basketVM.Price * basketVM.Count);
