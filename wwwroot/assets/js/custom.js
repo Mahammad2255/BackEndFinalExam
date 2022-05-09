@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-	$(document).on("click", "#productdetail", function (e) {
+	$(document).on("click", ".productdetail", function (e) {
 		e.preventDefault();
 
 		let url = $(this).attr("href");
@@ -95,19 +95,63 @@
 	})
 
 	$(document).on("click", "#addbasketbtn", function (e) {
+
+
 		e.preventDefault()
-		console.log("Test");
+	
 		let url = $("#basketform").attr("action")
 		let count = $("#productcount").val();
 		url = url + "?count=" + count;
 		fetch(url).then(response => {
 			return response.text();
 		}).then(data => {
-			console.log("Test2");
-
 			$(".minicart-inner-content").html(data)
 
         })
-	})	
+	})
 
+	$(document).on("click", ".addbasketlink", function (e) {
+
+
+		e.preventDefault()
+
+		let url = $(this).attr("href")
+
+		fetch(url).then(response => {
+			return response.text();
+		}).then(data => {
+			$(".minicart-inner-content").html(data)
+
+		})
+	})
+
+	$(document).on("click", ".basketUpdate", function (e) {
+		e.preventDefault();
+		let url = $(this).attr("href");
+		let count = $(this).parent().children()[1].value;
+		count = parseInt(count);
+
+		if ($(this).hasClass("subCount")) {
+			count--;
+		}
+		else if ($(this).hasClass("addCount")) {
+			count++;
+		}
+		$(this).parent().children()[1].value = count
+		url = url + "?count=" + count;
+
+		fetch(url).then(response => {
+			fetch("Basket/GetBasket").then(response => response.text()).then(data => $(".header-cart").html(data))
+			return response.text()
+		}).then(data => $(".basketContainer").html(data))
+	})
+	$(document).on("keyup", ".basketItemCount", function () {
+		let url = $(this).next().attr("href");
+		url = url + "?count=" + $(this).val();
+
+		if ($(this).val().trim()) {
+			fetch(url).then(response => response.text()).then(data => $(".basketContainer").html(data))
+
+		}
+	})
 })

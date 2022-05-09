@@ -1,6 +1,8 @@
 ﻿@inject LayoutService layoutService
-@model HomeVM
-@{ 
+
+
+@{
+    Setting setting = await layoutService.GetSetting();
     List<BasketVM> basketVMs = await layoutService.GetBasket();
 }
 <!DOCTYPE html>
@@ -22,7 +24,7 @@
     <!--=== Main Style CSS ===-->
     <link href="assets/css/style.css" rel="stylesheet">
     <!-- Modernizer JS -->
-    <script src="assets/js/modernizr-2.8.3.min.js"></script>
+    <script src="~/assets/js/modernizr-2.8.3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/assets/js/custom.js" asp-append-version="true"></script>
 
@@ -30,6 +32,11 @@
     <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="~/assets/js/vendor.js"></script>
+    <!--=== All Plugins Js ===-->
+    <script src="~/assets/js/plugins.js"></script>
+    <!--=== Active Js ===-->
+    <script src="~/assets/js/active.js"></script>
 </head>
 
 <body>
@@ -44,7 +51,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-6">
                             <div class="welcome-message">
-                                <p>@Model.Setting.StoreName</p>
+                                <p>@setting.StoreName</p>
                             </div>
                         </div>
                         <div class="col-lg-6 text-right">
@@ -81,7 +88,7 @@
                         <div class="col-lg-2">
                             <div class="logo">
                                 <a href="index.html">
-                                    <img src="~/assets/images/@Model.Setting.LogoImage" alt="">
+                                    <img src="~/assets/images/@setting.LogoImage" alt="">
                                 </a>
                             </div>
                         </div>
@@ -285,9 +292,9 @@
                             <h5 class="widget-title">My Account</h5>
                             <div class="widget-body">
                                 <ul class="location-wrap">
-                                    <li><i class="ion-ios-location-outline"></i>@Model.Setting.Address</li>
-                                    <li><i class="ion-ios-email-outline"></i>Mail Us: <a href="mailto:yourmail@gmail.com">@Model.Setting.Email</a></li>
-                                    <li><i class="ion-ios-telephone-outline"></i>Phone: <a href="%2b0025425456554">@Model.Setting.Phone</a></li>
+                                    <li><i class="ion-ios-location-outline"></i>@setting.Address</li>
+                                    <li><i class="ion-ios-email-outline"></i>Mail Us: <a href="mailto:yourmail@gmail.com">@setting.Email</a></li>
+                                    <li><i class="ion-ios-telephone-outline"></i>Phone: <a href="%2b0025425456554">@setting.Phone</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -415,3 +422,5 @@
 
 <!-- Mirrored from demo.hasthemes.com/juan-preview-v1/juan/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 07 Mar 2021 22:36:53 GMT -->
 </html>
+
+

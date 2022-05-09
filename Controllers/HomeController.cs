@@ -23,7 +23,7 @@ namespace BackEndFinalExam.Controllers
             HomeVM homeVM = new HomeVM
             {
                 Sliders = _context.Sliders.ToList(),
-                Setting = _context.Settings.FirstOrDefault(),
+                
                 Products = _context.Products.ToList()
             };
             return View(homeVM);

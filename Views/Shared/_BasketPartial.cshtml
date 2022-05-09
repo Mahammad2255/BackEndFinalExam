@@ -3,8 +3,9 @@
     double subTotal = 0;
     double tax = 0;
     double vat = 0;
+
 }
- 
+
 <div class="minicart-close">
 
     <i class="ion-android-close"></i>
@@ -32,6 +33,7 @@
                     </div>
                     <button class="minicart-remove"><i class="ion-android-close"></i></button>
                 </li>
+
                 subTotal += (basketVM.Price * basketVM.Count);
                 tax += (basketVM.EcoTax * basketVM.Count);
                 vat += basketVM.VAT;
@@ -64,6 +66,7 @@
 
     <div class="minicart-button">
         <a href="cart.html"><i class="fa fa-shopping-cart"></i> view cart</a>
-        <a href="cart.html"><i class="fa fa-share"></i> checkout</a>
+        <a asp-controller="Basket" asp-action="Index"> checkout</a>
     </div>
 </div>
+
