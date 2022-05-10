@@ -1,5 +1,6 @@
 ﻿using BackEndFinalExam.DAL;
 using BackEndFinalExam.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace BackEndFinalExam.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
 
     public class ColorController : Controller
     {

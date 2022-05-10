@@ -50,5 +50,8 @@ namespace BackEndFinalExam.Models
       
         public int Count { get; set; }
         public IEnumerable<ProductSizeColor> ProductSizeColors{ get; set; }
+        public IEnumerable<Basket> Baskets { get; set; }
+        public IEnumerable<OrderItem> OrderItems { get; set; }
+
     }
 }

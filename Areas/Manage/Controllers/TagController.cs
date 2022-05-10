@@ -1,6 +1,7 @@
 ﻿using BackEndFinalExam.DAL;
 using BackEndFinalExam.Extentions;
 using BackEndFinalExam.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace BackEndFinalExam.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class TagController : Controller
     {
         private readonly BackEndExamDbContext _context;

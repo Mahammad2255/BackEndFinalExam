@@ -10,10 +10,12 @@ using BackEndFinalExam.Extentions;
 using Microsoft.Extensions.FileProviders;
 using BackEndFinalExam.Helpers;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BackEndFinalExam.Areas.Manage.Controllers
 {
     [Area("manage")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class SettingController : Controller
     {
         private readonly BackEndExamDbContext _context;

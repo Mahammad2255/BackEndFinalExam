@@ -1,8 +1,10 @@
 using BackEndFinalExam.DAL;
+using BackEndFinalExam.Models;
 using BackEndFinalExam.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,6 +33,24 @@ namespace BackEndFinalExam
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.User.RequireUniqueEmail = true;
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+
+
+
+
+
+            }).AddDefaultTokenProviders().AddEntityFrameworkStores<BackEndExamDbContext>();
             services.AddScoped<LayoutService>();
             services.AddHttpContextAccessor();
         }
@@ -50,7 +70,8 @@ namespace BackEndFinalExam
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
+        
             app.UseRouting();
 
             app.UseAuthorization();

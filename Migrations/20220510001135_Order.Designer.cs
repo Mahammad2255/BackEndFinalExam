@@ -4,14 +4,16 @@ using BackEndFinalExam.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BackEndFinalExam.Migrations
 {
     [DbContext(typeof(BackEndExamDbContext))]
-    partial class BackEndExamDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220510001135_Order")]
+    partial class Order
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,20 +29,9 @@ namespace BackEndFinalExam.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
@@ -52,9 +43,6 @@ namespace BackEndFinalExam.Migrations
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -82,20 +70,12 @@ namespace BackEndFinalExam.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
-
-                    b.Property<string>("ZipCode")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 

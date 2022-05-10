@@ -1,4 +1,5 @@
 ﻿using BackEndFinalExam.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,8 +8,9 @@ using System.Threading.Tasks;
 
 namespace BackEndFinalExam.DAL
 {
-    public class BackEndExamDbContext: DbContext
+    public class BackEndExamDbContext: IdentityDbContext<AppUser>
     {
+       
         public BackEndExamDbContext(DbContextOptions<BackEndExamDbContext> options): base(options) { }
         public DbSet<Setting> Settings { get; set; }
         public DbSet<Slider> Sliders{ get; set; }
@@ -22,8 +24,11 @@ namespace BackEndFinalExam.DAL
         public DbSet<ProductTag> ProductTags{ get; set; }
 
         public DbSet<ProductSizeColor> productSizeColors{ get; set; }
+        public DbSet<AppUser> AppUsers { get; set; }
 
-
+        public DbSet<Basket>  Baskets{ get; set; }
+        public DbSet<Order>  Orders{ get; set; }
+        public DbSet<OrderItem>  OrderItems{ get; set; }
 
 
 
